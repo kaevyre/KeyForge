@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KeyForge</string>
+    <string name="cd_back">Назад</string>
+
+    <!-- Онбординг -->
+    <string name="onb_skip">Пропустити</string>
+    <string name="onb_next">Далі</string>
+    <string name="onb_start">Почати</string>
+    <string name="onb_language">Мова</string>
+    <string name="onb_title_1">Збери сетап своєї мрії</string>
+    <string name="onb_text_1">Кастомні клавіатури, мишки, навушники та килимки — під твій стиль гри.</string>
+    <string name="onb_title_2">Обери свій девайс</string>
+    <string name="onb_text_2">Від ігрових мишок до XL-килимків: фільтруй за типом і знаходь своє.</string>
+    <string name="onb_title_3">Налаштуй кожну деталь</string>
+    <string name="onb_text_3">Колір корпусу, світчі, кейкапи, гравіювання — зміни видно в прев’ю одразу.</string>
+    <string name="onb_title_4">Прямо до твого столу</string>
+    <string name="onb_text_4">Оформи замовлення і стеж за ним від збірки до доставки.</string>
+    <string name="onb_engraving">ГРАВІЮВАННЯ: NICKNAME</string>
+    <string name="order_step_assembly">Збірка</string>
+    <string name="order_step_testing">Тестування</string>
+    <string name="order_step_delivery">Доставка</string>
+
+    <!-- Категорії -->
+    <string name="cat_all">Усі</string>
+    <string name="cat_keyboards">Клавіатури</string>
+    <string name="cat_mice">Мишки</string>
+    <string name="cat_headsets">Навушники</string>
+    <string name="cat_mats">Килимки</string>
+
+    <!-- Каталог -->
+    <string name="catalog_greeting">Привіт, клавішнику</string>
+    <string name="catalog_title">Каталог</string>
+    <string name="catalog_search">Пошук</string>
+    <string name="catalog_search_hint">Кейкапи, світчі, мишки…</string>
+    <string name="catalog_clear">Очистити пошук</string>
+    <string name="catalog_banner_label">КОНСТРУКТОР</string>
+    <string name="catalog_banner_title">Збери клавіатуру під себе</string>
+    <string name="catalog_banner_text">Корпус, світчі, кейкапи, гравіювання</string>
+    <string name="catalog_popular">Популярне</string>
+    <string name="catalog_empty">Нічого не знайдено. Спробуй інший запит.</string>
+    <string name="catalog_added">%1$s додано в кошик</string>
+    <string name="cd_add_to_cart">Додати %1$s у кошик</string>
+    <string name="cd_open_cart">Відкрити кошик, товарів: %1$d</string>
+
+    <!-- Підписи товарів -->
+    <string name="sub_forge_65">Кейкапи «Зоряна ніч»</string>
+    <string name="sub_forge_tkl">96% · кейкапи Halloween</string>
+    <string name="sub_pulse">58 г · бездротова</string>
+    <string name="sub_pulse_mini">49 г · дротова</string>
+    <string name="sub_echo">7.1 · мікрофон</string>
+    <string name="sub_echo_studio">Накладні · принт тюль</string>
+    <string name="sub_grid_xl">900×400 мм</string>
+    <string name="sub_grid_retro">800×300 мм · принт</string>
+
+    <!-- Навігація -->
+    <string name="nav_catalog">Каталог</string>
+    <string name="nav_builder">Конструктор</string>
+    <string name="nav_cart">Кошик</string>
+    <string name="nav_settings">Налаштування</string>
+
+    <!-- Конструктор -->
+    <string name="builder_subtitle">Механічна клавіатура · 65%</string>
+    <string name="builder_colorway">Колорвей</string>
+    <string name="builder_switches">Світчі</string>
+    <string name="switch_linear">плавні</string>
+    <string name="switch_tactile">відчутні</string>
+    <string name="switch_clicky">клікають</string>
+    <string name="builder_profile">Профіль кейкапів</string>
+    <string name="builder_engraving">Гравіювання на пробілі</string>
+    <string name="builder_engraving_hint">Твій нікнейм</string>
+    <string name="builder_total">Разом</string>
+    <string name="builder_add">У кошик</string>
+    <string name="builder_added">Додано ✓</string>
+
+    <!-- Кошик -->
+    <string name="cart_title">Кошик</string>
+    <string name="cart_items">Товарів: %1$d</string>
+    <string name="cart_empty_title">Кошик порожній</string>
+    <string name="cart_empty_text">Обери щось у каталозі або збери власну клавіатуру.</string>
+    <string name="cart_go_catalog">До каталогу</string>
+    <string name="cd_remove">Видалити %1$s</string>
+    <string name="cart_total">Разом</string>
+    <string name="cart_checkout">Оформити замовлення</string>
+    <string name="cart_order_placed">Замовлення оформлено! Починаємо збірку.</string>
+
+    <!-- Налаштування -->
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_language">МОВА</string>
+    <string name="lang_uk">Українська</string>
+    <string name="lang_en">English</string>
+    <string name="settings_theme">ТЕМА</string>
+    <string name="theme_dark">Темна</string>
+    <string name="theme_light">Світла</string>
+    <string name="theme_system">Системна</string>
+    <string name="settings_notifications">Сповіщення про замовлення</string>
+    <string name="settings_onboarding">Показати ознайомлення знову</string>
+    <string name="settings_footer">KeyForge v1.0 · збережено на пристрої</string>
+</resources>
