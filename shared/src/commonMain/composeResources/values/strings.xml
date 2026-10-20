@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KeyForge</string>
+    <string name="cd_back">Back</string>
+
+    <!-- Onboarding -->
+    <string name="onb_skip">Skip</string>
+    <string name="onb_next">Next</string>
+    <string name="onb_start">Get started</string>
+    <string name="onb_language">Language</string>
+    <string name="onb_title_1">Build your dream setup</string>
+    <string name="onb_text_1">Custom keyboards, mice, headsets and desk mats — made for how you play.</string>
+    <string name="onb_title_2">Pick your gear</string>
+    <string name="onb_text_2">From gaming mice to XL desk mats: filter by type and find your match.</string>
+    <string name="onb_title_3">Tune every detail</string>
+    <string name="onb_text_3">Shell color, switches, keycaps, engraving — every change shows live in preview.</string>
+    <string name="onb_title_4">Straight to your desk</string>
+    <string name="onb_text_4">Place an order and follow it from assembly to delivery.</string>
+    <string name="onb_engraving">ENGRAVING: NICKNAME</string>
+    <string name="order_step_assembly">Assembly</string>
+    <string name="order_step_testing">Testing</string>
+    <string name="order_step_delivery">Delivery</string>
+
+    <!-- Categories -->
+    <string name="cat_all">All</string>
+    <string name="cat_keyboards">Keyboards</string>
+    <string name="cat_mice">Mice</string>
+    <string name="cat_headsets">Headsets</string>
+    <string name="cat_mats">Desk mats</string>
+
+    <!-- Catalog -->
+    <string name="catalog_greeting">Hi, key clicker</string>
+    <string name="catalog_title">Catalog</string>
+    <string name="catalog_search">Search</string>
+    <string name="catalog_search_hint">Keycaps, switches, mice…</string>
+    <string name="catalog_clear">Clear search</string>
+    <string name="catalog_banner_label">BUILDER</string>
+    <string name="catalog_banner_title">Build a keyboard your way</string>
+    <string name="catalog_banner_text">Shell, switches, keycaps, engraving</string>
+    <string name="catalog_popular">Popular</string>
+    <string name="catalog_empty">Nothing found. Try another query.</string>
+    <string name="catalog_added">%1$s added to cart</string>
+    <string name="cd_add_to_cart">Add %1$s to cart</string>
+    <string name="cd_open_cart">Open cart, items: %1$d</string>
+
+    <!-- Product subtitles -->
+    <string name="sub_forge_65">Starry Night keycaps</string>
+    <string name="sub_forge_tkl">96% · Halloween keycaps</string>
+    <string name="sub_pulse">58 g · wireless</string>
+    <string name="sub_pulse_mini">49 g · wired</string>
+    <string name="sub_echo">7.1 · microphone</string>
+    <string name="sub_echo_studio">On-ear · toile print</string>
+    <string name="sub_grid_xl">900×400 mm</string>
+    <string name="sub_grid_retro">800×300 mm · print</string>
+
+    <!-- Navigation -->
+    <string name="nav_catalog">Catalog</string>
+    <string name="nav_builder">Builder</string>
+    <string name="nav_cart">Cart</string>
+    <string name="nav_settings">Settings</string>
+
+    <!-- Builder -->
+    <string name="builder_subtitle">Mechanical keyboard · 65%</string>
+    <string name="builder_colorway">Colorway</string>
+    <string name="builder_switches">Switches</string>
+    <string name="switch_linear">smooth</string>
+    <string name="switch_tactile">bumpy</string>
+    <string name="switch_clicky">clicky</string>
+    <string name="builder_profile">Keycap profile</string>
+    <string name="builder_engraving">Spacebar engraving</string>
+    <string name="builder_engraving_hint">Your nickname</string>
+    <string name="builder_total">Total</string>
+    <string name="builder_add">Add to cart</string>
+    <string name="builder_added">Added ✓</string>
+
+    <!-- Cart -->
+    <string name="cart_title">Cart</string>
+    <string name="cart_items">Items: %1$d</string>
+    <string name="cart_empty_title">Your cart is empty</string>
+    <string name="cart_empty_text">Pick something in the catalog or build your own keyboard.</string>
+    <string name="cart_go_catalog">Go to catalog</string>
+    <string name="cd_remove">Remove %1$s</string>
+    <string name="cart_total">Total</string>
+    <string name="cart_checkout">Place order</string>
+    <string name="cart_order_placed">Order placed! We are starting the assembly.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_language">LANGUAGE</string>
+    <string name="lang_uk">Українська</string>
+    <string name="lang_en">English</string>
+    <string name="settings_theme">THEME</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_system">System</string>
+    <string name="settings_notifications">Order notifications</string>
+    <string name="settings_onboarding">Show onboarding again</string>
+    <string name="settings_footer">KeyForge v1.0 · saved on device</string>
+</resources>
