@@ -66,7 +66,6 @@ private val AppLanguage.displayName: StringResource
         AppLanguage.ENGLISH -> Res.string.lang_en
     }
 
-/** User settings, persisted with multiplatform-settings. */
 @Composable
 fun SettingsScreen(viewModel: SettingsViewModel = koinViewModel()) {
     val preferences by viewModel.preferences.collectAsStateWithLifecycle()

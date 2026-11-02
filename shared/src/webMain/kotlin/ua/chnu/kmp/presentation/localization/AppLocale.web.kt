@@ -5,7 +5,6 @@ import androidx.compose.runtime.ProvidedValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.intl.Locale
 
-/** `window.__customLocale` is read by the `navigator.languages` override in index.html. */
 external object window {
     @Suppress("PropertyName")
     var __customLocale: String?

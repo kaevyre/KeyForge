@@ -37,12 +37,6 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import ua.chnu.kmp.presentation.theme.RetroTheme
 
-/**
- * The signature element of the retro design: a surface with a thick ink outline and a hard
- * shadow under it, like a keycap. When pressed (or selected) it travels down onto its shadow.
- *
- * With [onClick] == null it is a static surface.
- */
 @Composable
 fun Keycap(
     modifier: Modifier = Modifier,
@@ -102,7 +96,6 @@ fun Keycap(
     }
 }
 
-/** Visual-only toggle in keycap style; make the whole row `toggleable` instead of this. */
 @Composable
 fun RetroSwitch(checked: Boolean, modifier: Modifier = Modifier) {
     val colors = RetroTheme.colors

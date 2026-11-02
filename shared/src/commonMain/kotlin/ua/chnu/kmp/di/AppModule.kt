@@ -16,24 +16,25 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 import ua.chnu.kmp.data.cart.InMemoryCartRepository
 import ua.chnu.kmp.data.catalog.LocalProductRepository
-import ua.chnu.kmp.data.posts.AppPostApiService
-import ua.chnu.kmp.data.posts.AppPostRepository
-import ua.chnu.kmp.data.posts.PostApiService
 import ua.chnu.kmp.data.settings.AppPreferencesRepository
+import ua.chnu.kmp.domain.auth.login.LoginUseCase
+import ua.chnu.kmp.domain.auth.validation.ValidatePasswordUseCase
+import ua.chnu.kmp.domain.auth.validation.ValidateUsernameUseCase
 import ua.chnu.kmp.domain.cart.CartRepository
 import ua.chnu.kmp.domain.catalog.ProductRepository
 import ua.chnu.kmp.domain.catalog.usecase.GetProductsUseCase
-import ua.chnu.kmp.domain.posts.PostRepository
-import ua.chnu.kmp.domain.posts.usecase.CreatePostUseCase
-import ua.chnu.kmp.domain.posts.usecase.DeletePostUseCase
-import ua.chnu.kmp.domain.posts.usecase.GetPostsUseCase
-import ua.chnu.kmp.domain.posts.usecase.UpdatePostUseCase
+import ua.chnu.kmp.domain.language.change.ChangeLanguageUseCase
+import ua.chnu.kmp.domain.language.obtain.ObtainLanguageUseCase
+import ua.chnu.kmp.domain.onboarding.check.CheckOnboardingUseCase
+import ua.chnu.kmp.domain.onboarding.complete.CompleteOnboardingUseCase
 import ua.chnu.kmp.domain.settings.PreferencesRepository
 import ua.chnu.kmp.presentation.RootViewModel
 import ua.chnu.kmp.presentation.builder.BuilderViewModel
 import ua.chnu.kmp.presentation.cart.CartViewModel
 import ua.chnu.kmp.presentation.catalog.CatalogViewModel
+import ua.chnu.kmp.presentation.login.LoginViewModel
 import ua.chnu.kmp.presentation.main.MainViewModel
+import ua.chnu.kmp.presentation.onboarding.OnboardingViewModel
 import ua.chnu.kmp.presentation.settings.SettingsViewModel
 
 val networkModule = module {
@@ -57,19 +58,19 @@ val networkModule = module {
             }
         }
     }
-
-    singleOf(::AppPostApiService) { bind<PostApiService>() }
 }
 val domainModule = module {
-    factoryOf(::GetPostsUseCase)
-    factoryOf(::CreatePostUseCase)
-    factoryOf(::UpdatePostUseCase)
-    factoryOf(::DeletePostUseCase)
     factoryOf(::GetProductsUseCase)
+    factoryOf(::CompleteOnboardingUseCase)
+    factoryOf(::CheckOnboardingUseCase)
+    factoryOf(::ValidateUsernameUseCase)
+    factoryOf(::ValidatePasswordUseCase)
+    factoryOf(::LoginUseCase)
+    factoryOf(::ChangeLanguageUseCase)
+    factoryOf(::ObtainLanguageUseCase)
 }
 
 val dataModule = module {
-    // No-arg factory picks the platform store: SharedPreferences, NSUserDefaults, Preferences, localStorage.
     single<Settings> { Settings() }
     singleOf(::AppPreferencesRepository) { bind<PreferencesRepository>() }
     singleOf(::LocalProductRepository) { bind<ProductRepository>() }
@@ -78,9 +79,10 @@ val dataModule = module {
 
 val appModule = module {
     includes(networkModule, domainModule, dataModule)
-    singleOf(::AppPostRepository) { bind<PostRepository>() }
     viewModelOf(::RootViewModel)
     viewModelOf(::MainViewModel)
+    viewModelOf(::OnboardingViewModel)
+    viewModelOf(::LoginViewModel)
     viewModelOf(::CatalogViewModel)
     viewModelOf(::BuilderViewModel)
     viewModelOf(::CartViewModel)

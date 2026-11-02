@@ -3,7 +3,6 @@ package ua.chnu.kmp.presentation.theme
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.graphics.Color
 
-/** Raw palette of the "Retro Keycap" design. */
 object RetroPalette {
     val Rust = Color(0xFFC8461F)
     val RustLight = Color(0xFFDA5A31)
@@ -28,7 +27,6 @@ object RetroPalette {
     val NightBody = Color(0xFFD8CEBF)
 }
 
-/** Colors that Material's ColorScheme has no slot for. */
 @Immutable
 data class RetroColors(
     val outline: Color,

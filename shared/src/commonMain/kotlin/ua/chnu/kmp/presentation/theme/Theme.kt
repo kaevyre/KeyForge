@@ -57,7 +57,6 @@ private val RetroShapes = Shapes(
 
 private val LocalRetroColors = staticCompositionLocalOf { LightRetroColors }
 
-/** Custom KeyForge theme: retro keycap colors, Rubik / Rubik Mono One / IBM Plex Mono. */
 @Composable
 fun KeyForgeTheme(
     darkTheme: Boolean,

@@ -18,7 +18,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-/** How a key is colored inside a [KeyboardColors] scheme. */
 enum class KeyKind { Alpha, Mod, Accent, Highlight }
 
 @Immutable
@@ -37,7 +36,6 @@ data class KeyboardColors(
     val onHighlight: Color = onAccent,
 )
 
-/** A small drawn keyboard made of keycaps — used in onboarding and in the builder preview. */
 @Composable
 fun KeyboardPreview(
     rows: List<List<KeySpec>>,
@@ -87,7 +85,6 @@ fun KeyboardPreview(
     }
 }
 
-/** Full Ukrainian ЙЦУКЕН layout, five rows. */
 val OnboardingKeyboardRows: List<List<KeySpec>> = listOf(
     listOf(KeySpec("Esc", kind = KeyKind.Accent)) + "1234567".map { KeySpec(it.toString()) } + KeySpec("Del", 1.6f, KeyKind.Mod),
     listOf(KeySpec("Tab", 1.5f, KeyKind.Mod)) + "ЙЦУКЕНГ".map { KeySpec(it.toString()) },
@@ -96,7 +93,6 @@ val OnboardingKeyboardRows: List<List<KeySpec>> = listOf(
     listOf(KeySpec("Ctrl", 1.3f, KeyKind.Mod), KeySpec("", 5.5f, KeyKind.Highlight), KeySpec("Fn", 1.3f, KeyKind.Mod), KeySpec("→")),
 )
 
-/** Compact 4-row layout for the builder; the spacebar carries the engraving. */
 fun builderKeyboardRows(spaceLabel: String): List<List<KeySpec>> = listOf(
     listOf(KeySpec("Esc", kind = KeyKind.Accent)) + "123456".map { KeySpec(it.toString()) } + KeySpec("Del", 1.6f, KeyKind.Accent),
     listOf(KeySpec("Tab", 1.5f, KeyKind.Accent)) + "ЙЦУКЕН".map { KeySpec(it.toString()) },

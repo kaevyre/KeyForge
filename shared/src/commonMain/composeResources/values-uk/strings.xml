@@ -3,7 +3,6 @@
     <string name="app_name">KeyForge</string>
     <string name="cd_back">Назад</string>
 
-    <!-- Онбординг -->
     <string name="onb_skip">Пропустити</string>
     <string name="onb_next">Далі</string>
     <string name="onb_start">Почати</string>
@@ -21,14 +20,12 @@
     <string name="order_step_testing">Тестування</string>
     <string name="order_step_delivery">Доставка</string>
 
-    <!-- Категорії -->
     <string name="cat_all">Усі</string>
     <string name="cat_keyboards">Клавіатури</string>
     <string name="cat_mice">Мишки</string>
     <string name="cat_headsets">Навушники</string>
     <string name="cat_mats">Килимки</string>
 
-    <!-- Каталог -->
     <string name="catalog_greeting">Привіт, клавішнику</string>
     <string name="catalog_title">Каталог</string>
     <string name="catalog_search">Пошук</string>
@@ -43,7 +40,6 @@
     <string name="cd_add_to_cart">Додати %1$s у кошик</string>
     <string name="cd_open_cart">Відкрити кошик, товарів: %1$d</string>
 
-    <!-- Підписи товарів -->
     <string name="sub_forge_65">Кейкапи «Зоряна ніч»</string>
     <string name="sub_forge_tkl">96% · кейкапи Halloween</string>
     <string name="sub_pulse">58 г · бездротова</string>
@@ -53,13 +49,11 @@
     <string name="sub_grid_xl">900×400 мм</string>
     <string name="sub_grid_retro">800×300 мм · принт</string>
 
-    <!-- Навігація -->
     <string name="nav_catalog">Каталог</string>
     <string name="nav_builder">Конструктор</string>
     <string name="nav_cart">Кошик</string>
     <string name="nav_settings">Налаштування</string>
 
-    <!-- Конструктор -->
     <string name="builder_subtitle">Механічна клавіатура · 65%</string>
     <string name="builder_colorway">Колорвей</string>
     <string name="builder_switches">Світчі</string>
@@ -73,7 +67,6 @@
     <string name="builder_add">У кошик</string>
     <string name="builder_added">Додано ✓</string>
 
-    <!-- Кошик -->
     <string name="cart_title">Кошик</string>
     <string name="cart_items">Товарів: %1$d</string>
     <string name="cart_empty_title">Кошик порожній</string>
@@ -84,7 +77,6 @@
     <string name="cart_checkout">Оформити замовлення</string>
     <string name="cart_order_placed">Замовлення оформлено! Починаємо збірку.</string>
 
-    <!-- Налаштування -->
     <string name="settings_title">Налаштування</string>
     <string name="settings_language">МОВА</string>
     <string name="lang_uk">Українська</string>
@@ -96,4 +88,14 @@
     <string name="settings_notifications">Сповіщення про замовлення</string>
     <string name="settings_onboarding">Показати ознайомлення знову</string>
     <string name="settings_footer">KeyForge v1.0 · збережено на пристрої</string>
+
+    <string name="login_title">Вхід</string>
+    <string name="login_subtitle">З поверненням у кузню. Увійди, щоб продовжити.</string>
+    <string name="login_username">ІМ’Я КОРИСТУВАЧА</string>
+    <string name="login_username_hint">your_nickname</string>
+    <string name="login_password">ПАРОЛЬ</string>
+    <string name="login_password_hint">Щонайменше 6 символів</string>
+    <string name="login_sign_in">Увійти</string>
+    <string name="error_username_invalid">Ім’я: 3–20 латинських літер, цифр або «_»</string>
+    <string name="error_password_invalid">Пароль: щонайменше 6 символів, літера й цифра, без пробілів</string>
 </resources>

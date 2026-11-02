@@ -19,7 +19,6 @@ import ua.chnu.kmp.domain.catalog.model.ProductCategory
 @Immutable
 data class CartLine(
     val item: CartItem,
-    /** `null` for custom builds. */
     val category: ProductCategory?,
 )
 
@@ -38,7 +37,6 @@ class CartViewModel internal constructor(
     private val cartRepository: CartRepository,
     productRepository: ProductRepository,
 ) : ViewModel() {
-
     private val logger = Logger.withTag("Cart")
     private val categories = productRepository.getProducts().associate { it.id to it.category }
 

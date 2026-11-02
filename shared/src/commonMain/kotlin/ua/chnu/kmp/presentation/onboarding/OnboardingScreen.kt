@@ -43,10 +43,12 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
+import org.koin.compose.viewmodel.koinViewModel
 import ua.chnu.kmp.domain.catalog.model.ProductCategory
 import ua.chnu.kmp.domain.settings.model.AppLanguage
 import ua.chnu.kmp.presentation.theme.RetroPalette
@@ -56,6 +58,8 @@ import ua.chnu.kmp.presentation.ui.components.KeyboardPreview
 import ua.chnu.kmp.presentation.ui.components.Keycap
 import ua.chnu.kmp.presentation.ui.components.OnboardingKeyboardRows
 import ua.chnu.kmp.presentation.ui.components.dashedBorder
+import ua.chnu.kmp.presentation.ui.ObserveEvents
+import ua.chnu.kmp.presentation.ui.effectiveLanguage
 import ua.chnu.kmp.presentation.ui.icon
 import ua.chnu.kmp.presentation.ui.label
 import ua.chnu.kmp.presentation.ui.shortLabel
@@ -92,21 +96,37 @@ private val Pages = listOf(
     OnboardingPage(Res.string.onb_title_4, Res.string.onb_text_4),
 )
 
-/** Introduction to the app: 4 slides built on [HorizontalPager]. */
 @Composable
 fun OnboardingScreen(
-    currentLanguage: AppLanguage,
-    initialPage: Int,
-    onPageChanged: (Int) -> Unit,
-    onLanguageSelected: (AppLanguage) -> Unit,
-    onFinished: () -> Unit,
+    onNavigateToLogin: () -> Unit,
+    viewModel: OnboardingViewModel = koinViewModel(),
 ) {
-    val pagerState = rememberPagerState(initialPage = initialPage) { Pages.size }
+    val state by viewModel.state.collectAsStateWithLifecycle()
+
+    ObserveEvents(viewModel.events) { event ->
+        when (event) {
+            OnboardingEvent.NavigateToLogin -> onNavigateToLogin()
+        }
+    }
+
+    OnboardingContent(
+        state = state,
+        onAction = viewModel::onAction,
+    )
+}
+
+@Composable
+private fun OnboardingContent(
+    state: OnboardingState,
+    onAction: (OnboardingAction) -> Unit,
+) {
+    val pagerState = rememberPagerState(initialPage = state.currentPage) { Pages.size }
+    val onFinished = { onAction(OnboardingAction.OnFinish) }
     val scope = rememberCoroutineScope()
     val colors = RetroTheme.colors
 
     LaunchedEffect(pagerState) {
-        snapshotFlow { pagerState.currentPage }.collect(onPageChanged)
+        snapshotFlow { pagerState.currentPage }.collect { onAction(OnboardingAction.OnPageChanged(it)) }
     }
 
     Column(
@@ -122,7 +142,7 @@ fun OnboardingScreen(
         ) {
             Logo()
             Spacer(Modifier.weight(1f))
-            LanguageToggle(currentLanguage, onLanguageSelected)
+            LanguageToggle(effectiveLanguage(state.language)) { onAction(OnboardingAction.OnLanguageSelected(it)) }
             Spacer(Modifier.width(8.dp))
             Text(
                 text = stringResource(Res.string.onb_skip),
@@ -296,8 +316,6 @@ private fun PagerIndicator(pageCount: Int, currentPage: Int) {
         }
     }
 }
-
-// ---- Slide illustrations ----
 
 @Composable
 private fun KeyboardIllustration() {

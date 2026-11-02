@@ -47,6 +47,7 @@ import ua.chnu.kmp.presentation.cart.CartScreen
 import ua.chnu.kmp.presentation.catalog.CatalogScreen
 import ua.chnu.kmp.presentation.settings.SettingsScreen
 import ua.chnu.kmp.presentation.theme.RetroTheme
+import ua.chnu.kmp.presentation.ui.ObserveEvents
 import ua.chnu.kmp.presentation.ui.components.Keycap
 import ua.chnu.kmp.resources.Res
 import ua.chnu.kmp.resources.ic_cart
@@ -66,7 +67,16 @@ enum class MainTab(val label: StringResource, val icon: DrawableResource) {
 }
 
 @Composable
-fun MainScreen(viewModel: MainViewModel = koinViewModel()) {
+fun MainScreen(
+    onNavigateToOnboarding: () -> Unit,
+    viewModel: MainViewModel = koinViewModel(),
+) {
+    ObserveEvents(viewModel.events) { event ->
+        when (event) {
+            MainEvent.NavigateToOnboarding -> onNavigateToOnboarding()
+        }
+    }
+
     val tab by viewModel.selectedTab.collectAsStateWithLifecycle()
     val cartCount by viewModel.cartCount.collectAsStateWithLifecycle()
     val snackbarHostState = remember { SnackbarHostState() }

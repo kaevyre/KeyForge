@@ -61,7 +61,6 @@ import ua.chnu.kmp.resources.catalog_added
 import ua.chnu.kmp.resources.cd_back
 import ua.chnu.kmp.resources.ic_back
 
-/** Keyboard builder: colorway, switches, keycap profile, engraving — with a live preview. */
 @Composable
 fun BuilderScreen(
     snackbarHostState: SnackbarHostState,
@@ -70,7 +69,6 @@ fun BuilderScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
-    // Resolve snackbar text in the app-selected language, not the system one.
     val environment = rememberResourceEnvironment()
     val colors = RetroTheme.colors
 

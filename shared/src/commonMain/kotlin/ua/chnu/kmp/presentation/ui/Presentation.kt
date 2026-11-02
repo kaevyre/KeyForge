@@ -34,7 +34,6 @@ import ua.chnu.kmp.resources.sub_grid_xl
 import ua.chnu.kmp.resources.sub_pulse
 import ua.chnu.kmp.resources.sub_pulse_mini
 
-/** "12 345 ₴" with non-breaking spaces. */
 fun formatUah(amount: Int): String {
     val grouped = amount.toString().reversed().chunked(3).joinToString(" ").reversed()
     return "$grouped ₴"
@@ -56,7 +55,6 @@ val ProductCategory.icon: DrawableResource
         ProductCategory.MATS -> Res.drawable.ic_mat
     }
 
-/** Background and content color of a product tile. */
 @Composable
 fun ProductCategory?.tileColors(): Pair<Color, Color> {
     val colors = RetroTheme.colors
@@ -68,7 +66,6 @@ fun ProductCategory?.tileColors(): Pair<Color, Color> {
     }
 }
 
-/** Product photo (Unsplash, see README), or `null` for custom builds. */
 fun productImage(productId: Int): DrawableResource? = when (productId) {
     1 -> Res.drawable.product_forge_65
     2 -> Res.drawable.product_forge_tkl
@@ -81,7 +78,6 @@ fun productImage(productId: Int): DrawableResource? = when (productId) {
     else -> null
 }
 
-/** Localized one-line spec for a catalog product. */
 fun productSubtitle(productId: Int): StringResource? = when (productId) {
     1 -> Res.string.sub_forge_65
     2 -> Res.string.sub_forge_tkl
@@ -94,7 +90,6 @@ fun productSubtitle(productId: Int): StringResource? = when (productId) {
     else -> null
 }
 
-/** The language actually shown: the saved one, or the system one when nothing is saved. */
 @Composable
 fun effectiveLanguage(selected: AppLanguage?): AppLanguage =
     selected ?: if (LocalAppLocale.current.lowercase().startsWith("uk")) AppLanguage.UKRAINIAN else AppLanguage.ENGLISH
