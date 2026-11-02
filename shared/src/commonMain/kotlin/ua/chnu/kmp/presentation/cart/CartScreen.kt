@@ -69,7 +69,6 @@ fun CartScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
-    // Resolve snackbar text in the app-selected language, not the system one.
     val environment = rememberResourceEnvironment()
     val colors = RetroTheme.colors
 

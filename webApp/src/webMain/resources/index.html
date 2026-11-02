@@ -16,7 +16,6 @@
         </circle>
     </svg>
     <script>
-        // Lets the app override the language used by Compose resources (window.__customLocale).
         var currentLanguagesImplementation = Object.getOwnPropertyDescriptor(Navigator.prototype, "languages");
         var newLanguagesImplementation = Object.assign({}, currentLanguagesImplementation, {
             get: function () {

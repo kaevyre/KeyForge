@@ -12,7 +12,6 @@ enum class AppLanguage(val code: String) {
 enum class ThemeMode { SYSTEM, LIGHT, DARK }
 
 data class UserPreferences(
-    /** `null` means "follow the system language". */
     val language: AppLanguage? = null,
     val themeMode: ThemeMode = ThemeMode.SYSTEM,
     val notificationsEnabled: Boolean = true,

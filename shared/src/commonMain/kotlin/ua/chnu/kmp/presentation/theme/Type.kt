@@ -15,7 +15,6 @@ import ua.chnu.kmp.resources.rubik_medium
 import ua.chnu.kmp.resources.rubik_mono_one
 import ua.chnu.kmp.resources.rubik_regular
 
-/** Rubik — body and titles. */
 @Composable
 fun rubikFamily() = FontFamily(
     Font(Res.font.rubik_regular, FontWeight.Normal),
@@ -23,11 +22,9 @@ fun rubikFamily() = FontFamily(
     Font(Res.font.rubik_bold, FontWeight.Bold),
 )
 
-/** Rubik Mono One — chunky display headlines. */
 @Composable
 fun displayFamily() = FontFamily(Font(Res.font.rubik_mono_one, FontWeight.Normal))
 
-/** IBM Plex Mono — labels, prices, key legends. */
 @Composable
 fun monoFamily() = FontFamily(
     Font(Res.font.ibm_plex_mono_medium, FontWeight.Medium),

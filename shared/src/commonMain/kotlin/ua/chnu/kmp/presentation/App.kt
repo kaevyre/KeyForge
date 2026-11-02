@@ -1,6 +1,5 @@
 package ua.chnu.kmp.presentation
 
-import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
@@ -13,17 +12,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.compose.viewmodel.koinViewModel
 import ua.chnu.kmp.domain.settings.model.ThemeMode
 import ua.chnu.kmp.presentation.localization.AppEnvironment
-import ua.chnu.kmp.presentation.main.MainScreen
-import ua.chnu.kmp.presentation.onboarding.OnboardingScreen
+import ua.chnu.kmp.presentation.navigation.AppNavigation
 import ua.chnu.kmp.presentation.theme.KeyForgeTheme
-import ua.chnu.kmp.presentation.ui.effectiveLanguage
 
 @Composable
 fun App(
     viewModel: RootViewModel = koinViewModel(),
 ) {
     val preferences by viewModel.preferences.collectAsStateWithLifecycle()
-    val onboardingPage by viewModel.onboardingPage.collectAsStateWithLifecycle()
 
     AppEnvironment(languageCode = preferences.language?.code) {
         val darkTheme = when (preferences.themeMode) {
@@ -33,19 +29,7 @@ fun App(
         }
         KeyForgeTheme(darkTheme = darkTheme) {
             Box(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
-                Crossfade(targetState = preferences.onboardingCompleted, label = "rootScreen") { completed ->
-                    if (completed) {
-                        MainScreen()
-                    } else {
-                        OnboardingScreen(
-                            currentLanguage = effectiveLanguage(preferences.language),
-                            initialPage = onboardingPage,
-                            onPageChanged = viewModel::onOnboardingPageChanged,
-                            onLanguageSelected = viewModel::onLanguageSelected,
-                            onFinished = viewModel::completeOnboarding,
-                        )
-                    }
-                }
+                AppNavigation()
             }
         }
     }

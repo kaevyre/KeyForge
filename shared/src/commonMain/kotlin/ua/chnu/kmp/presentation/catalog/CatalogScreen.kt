@@ -93,7 +93,6 @@ fun CatalogScreen(
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
     val scope = rememberCoroutineScope()
-    // Resolve snackbar text in the app-selected language, not the system one.
     val environment = rememberResourceEnvironment()
 
     ObserveEvents(viewModel.events) { event ->

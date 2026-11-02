@@ -10,14 +10,9 @@ import ua.chnu.kmp.domain.settings.model.AppLanguage
 import ua.chnu.kmp.domain.settings.model.ThemeMode
 import ua.chnu.kmp.domain.settings.model.UserPreferences
 
-/**
- * Stores user preferences with multiplatform-settings
- * (SharedPreferences / NSUserDefaults / java.util.prefs / localStorage).
- */
 internal class AppPreferencesRepository(
     private val settings: Settings,
 ) : PreferencesRepository {
-
     private val logger = Logger.withTag("Preferences")
 
     private val _preferences = MutableStateFlow(read())

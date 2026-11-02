@@ -11,10 +11,6 @@ internal sealed class NetworkResult<out T>  {
     data class Failure(val errorMessage: String) : NetworkResult<Nothing>()
 }
 
-/**
- * Transforms the payload of a [NetworkResult.Success] with [transform].
- * A [NetworkResult.Failure] is passed through unchanged.
- */
 internal inline fun <T, R> NetworkResult<T>.map(transform: (T) -> R): NetworkResult<R> {
     return when (this) {
         is NetworkResult.Success -> NetworkResult.Success(transform(data))

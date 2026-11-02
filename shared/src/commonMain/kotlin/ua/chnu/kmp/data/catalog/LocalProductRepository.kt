@@ -4,9 +4,7 @@ import ua.chnu.kmp.domain.catalog.ProductRepository
 import ua.chnu.kmp.domain.catalog.model.Product
 import ua.chnu.kmp.domain.catalog.model.ProductCategory
 
-/** Static demo catalog. Prices are sample values. */
 internal class LocalProductRepository : ProductRepository {
-
     override fun getProducts(): List<Product> = PRODUCTS
 
     private companion object {
