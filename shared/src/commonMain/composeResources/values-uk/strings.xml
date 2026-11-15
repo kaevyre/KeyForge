@@ -98,4 +98,6 @@
     <string name="login_sign_in">Увійти</string>
     <string name="error_username_invalid">Ім’я: 3–20 латинських літер, цифр або «_»</string>
     <string name="error_password_invalid">Пароль: щонайменше 6 символів, літера й цифра, без пробілів</string>
+    <string name="login_quote">Час відкриває правду.</string>
+    <string name="login_quote_author">Сенека</string>
 </resources>

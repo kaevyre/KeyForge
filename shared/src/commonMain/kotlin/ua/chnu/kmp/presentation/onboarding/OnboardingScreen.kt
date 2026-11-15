@@ -7,6 +7,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -58,7 +60,9 @@ import ua.chnu.kmp.presentation.ui.components.KeyboardPreview
 import ua.chnu.kmp.presentation.ui.components.Keycap
 import ua.chnu.kmp.presentation.ui.components.OnboardingKeyboardRows
 import ua.chnu.kmp.presentation.ui.components.dashedBorder
+import ua.chnu.kmp.presentation.ui.CenteredScrollColumn
 import ua.chnu.kmp.presentation.ui.ObserveEvents
+import ua.chnu.kmp.presentation.ui.isTwoPaneLayout
 import ua.chnu.kmp.presentation.ui.effectiveLanguage
 import ua.chnu.kmp.presentation.ui.icon
 import ua.chnu.kmp.presentation.ui.label
@@ -124,6 +128,7 @@ private fun OnboardingContent(
     val onFinished = { onAction(OnboardingAction.OnFinish) }
     val scope = rememberCoroutineScope()
     val colors = RetroTheme.colors
+    val twoPane = isTwoPaneLayout()
 
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collect { onAction(OnboardingAction.OnPageChanged(it)) }
@@ -162,45 +167,10 @@ private fun OnboardingContent(
             modifier = Modifier.weight(1f).fillMaxWidth(),
             pageSpacing = 24.dp,
         ) { page ->
-            Column(Modifier.fillMaxSize()) {
-                val stageShape = RoundedCornerShape(28.dp)
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f)
-                        .heightIn(max = 420.dp)
-                        .clip(stageShape)
-                        .background(stageColor(page))
-                        .border(2.dp, colors.outline, stageShape),
-                    contentAlignment = Alignment.Center,
-                ) {
-                    when (page) {
-                        0 -> KeyboardIllustration()
-                        1 -> CategoriesIllustration()
-                        2 -> CustomizeIllustration()
-                        else -> DeliveryIllustration()
-                    }
-                }
-                Spacer(Modifier.height(24.dp))
-                Text(
-                    text = "0${page + 1} / 0${Pages.size}",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = colors.rust,
-                )
-                Spacer(Modifier.height(10.dp))
-                Text(
-                    text = stringResource(Pages[page].title),
-                    style = MaterialTheme.typography.displaySmall,
-                    color = MaterialTheme.colorScheme.onBackground,
-                    minLines = 2,
-                )
-                Spacer(Modifier.height(10.dp))
-                Text(
-                    text = stringResource(Pages[page].text),
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = colors.body,
-                    minLines = 3,
-                )
+            if (twoPane) {
+                OnboardingPageTwoPane(page)
+            } else {
+                OnboardingPageSinglePane(page)
             }
         }
 
@@ -247,6 +217,68 @@ private fun OnboardingContent(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun PageStage(page: Int, modifier: Modifier) {
+    val stageShape = RoundedCornerShape(28.dp)
+    Box(
+        modifier = modifier
+            .clip(stageShape)
+            .background(stageColor(page))
+            .border(2.dp, RetroTheme.colors.outline, stageShape),
+        contentAlignment = Alignment.Center,
+    ) {
+        when (page) {
+            0 -> KeyboardIllustration()
+            1 -> CategoriesIllustration()
+            2 -> CustomizeIllustration()
+            else -> DeliveryIllustration()
+        }
+    }
+}
+
+@Composable
+private fun PageTexts(page: Int) {
+    val colors = RetroTheme.colors
+    Text(
+        text = "0${page + 1} / 0${Pages.size}",
+        style = MaterialTheme.typography.labelLarge,
+        color = colors.rust,
+    )
+    Text(
+        text = stringResource(Pages[page].title),
+        style = MaterialTheme.typography.displaySmall,
+        color = MaterialTheme.colorScheme.onBackground,
+        minLines = 2,
+    )
+    Text(
+        text = stringResource(Pages[page].text),
+        style = MaterialTheme.typography.bodyLarge,
+        color = colors.body,
+        minLines = 3,
+    )
+}
+
+@Composable
+private fun OnboardingPageSinglePane(page: Int) {
+    Column(Modifier.fillMaxSize()) {
+        PageStage(page, Modifier.fillMaxWidth().weight(1f).heightIn(max = 420.dp))
+        Spacer(Modifier.height(24.dp))
+        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) { PageTexts(page) }
+    }
+}
+
+@Composable
+private fun OnboardingPageTwoPane(page: Int) {
+    Row(Modifier.fillMaxSize(), horizontalArrangement = Arrangement.spacedBy(32.dp)) {
+        PageStage(page, Modifier.weight(1f).fillMaxHeight())
+        CenteredScrollColumn(
+            modifier = Modifier.weight(1f).fillMaxHeight(),
+            spacing = 12.dp,
+            contentPadding = PaddingValues(vertical = 8.dp),
+        ) { PageTexts(page) }
     }
 }
 

@@ -4,6 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,12 +16,10 @@ import androidx.compose.foundation.layout.imePadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,11 +46,15 @@ import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.viewmodel.koinViewModel
 import ua.chnu.kmp.presentation.theme.RetroTheme
+import ua.chnu.kmp.presentation.ui.CenteredScrollColumn
 import ua.chnu.kmp.presentation.ui.ObserveEvents
+import ua.chnu.kmp.presentation.ui.isTwoPaneLayout
 import ua.chnu.kmp.presentation.ui.components.Keycap
 import ua.chnu.kmp.presentation.ui.components.dashedBorder
 import ua.chnu.kmp.resources.Res
 import ua.chnu.kmp.resources.login_password
+import ua.chnu.kmp.resources.login_quote
+import ua.chnu.kmp.resources.login_quote_author
 import ua.chnu.kmp.resources.login_password_hint
 import ua.chnu.kmp.resources.login_sign_in
 import ua.chnu.kmp.resources.login_subtitle
@@ -83,85 +89,175 @@ private fun LoginContent(
     val colors = RetroTheme.colors
     val focusManager = LocalFocusManager.current
 
-    Column(
-        modifier = Modifier
+    val form: @Composable ColumnScope.() -> Unit = {
+        LoginField(
+            label = Res.string.login_username,
+            hint = Res.string.login_username_hint,
+            value = state.username,
+            error = state.usernameError,
+            onValueChange = { onAction(LoginAction.OnUsernameChange(it)) },
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Text,
+                imeAction = ImeAction.Next,
+            ),
+            keyboardActions = KeyboardActions(
+                onNext = { focusManager.moveFocus(FocusDirection.Next) },
+            ),
+        )
+        LoginField(
+            label = Res.string.login_password,
+            hint = Res.string.login_password_hint,
+            value = state.password,
+            error = state.passwordError,
+            onValueChange = { onAction(LoginAction.OnPasswordChange(it)) },
+            visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(
+                keyboardType = KeyboardType.Password,
+                imeAction = ImeAction.Done,
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = { onAction(LoginAction.OnSignIn) },
+            ),
+        )
+    }
+    val signIn: @Composable () -> Unit = {
+        Keycap(
+            modifier = Modifier.fillMaxWidth().height(61.dp),
+            onClick = { onAction(LoginAction.OnSignIn) },
+            color = colors.rust,
+            contentColor = colors.onRust,
+        ) {
+            Text(
+                text = stringResource(Res.string.login_sign_in),
+                style = MaterialTheme.typography.titleMedium,
+            )
+        }
+    }
+
+    Box(
+        Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
             .systemBarsPadding()
-            .imePadding()
-            .verticalScroll(rememberScrollState())
-            .padding(horizontal = 24.dp, vertical = 20.dp),
+            .imePadding(),
+    ) {
+        if (isTwoPaneLayout()) {
+            LoginTwoPane(form, signIn)
+        } else {
+            LoginSinglePane(form, signIn)
+        }
+    }
+}
+
+@Composable
+private fun Logo() {
+    Text(
+        text = buildAnnotatedString {
+            append("KEY")
+            withStyle(SpanStyle(color = RetroTheme.colors.rust)) { append("FORGE") }
+        },
+        style = MaterialTheme.typography.headlineSmall,
+        color = MaterialTheme.colorScheme.onBackground,
+    )
+}
+
+@Composable
+private fun LoginHeader() {
+    Text(
+        text = stringResource(Res.string.login_title),
+        style = MaterialTheme.typography.displaySmall,
+        color = MaterialTheme.colorScheme.onBackground,
+    )
+    Text(
+        text = stringResource(Res.string.login_subtitle),
+        style = MaterialTheme.typography.bodyLarge,
+        color = RetroTheme.colors.body,
+    )
+}
+
+@Composable
+private fun LoginSinglePane(
+    form: @Composable ColumnScope.() -> Unit,
+    signIn: @Composable () -> Unit,
+) {
+    CenteredScrollColumn(
+        modifier = Modifier.fillMaxSize(),
+        spacing = 20.dp,
+        contentPadding = PaddingValues(horizontal = 24.dp, vertical = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(Modifier.widthIn(max = 420.dp).fillMaxWidth()) {
-            Text(
-                text = buildAnnotatedString {
-                    append("KEY")
-                    withStyle(SpanStyle(color = colors.rust)) { append("FORGE") }
-                },
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
-            Spacer(Modifier.height(40.dp))
-            Text(
-                text = stringResource(Res.string.login_title),
-                style = MaterialTheme.typography.displaySmall,
-                color = MaterialTheme.colorScheme.onBackground,
-            )
-            Spacer(Modifier.height(10.dp))
-            Text(
-                text = stringResource(Res.string.login_subtitle),
-                style = MaterialTheme.typography.bodyLarge,
-                color = colors.body,
-            )
-            Spacer(Modifier.height(32.dp))
-
-            LoginField(
-                label = Res.string.login_username,
-                hint = Res.string.login_username_hint,
-                value = state.username,
-                error = state.usernameError,
-                onValueChange = { onAction(LoginAction.OnUsernameChange(it)) },
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Text,
-                    imeAction = ImeAction.Next,
-                ),
-                keyboardActions = KeyboardActions(
-                    onNext = { focusManager.moveFocus(FocusDirection.Next) },
-                ),
-            )
+        Column(
+            modifier = Modifier.widthIn(max = SinglePaneMaxWidth).fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(20.dp),
+        ) {
+            Logo()
             Spacer(Modifier.height(20.dp))
-            LoginField(
-                label = Res.string.login_password,
-                hint = Res.string.login_password_hint,
-                value = state.password,
-                error = state.passwordError,
-                onValueChange = { onAction(LoginAction.OnPasswordChange(it)) },
-                visualTransformation = PasswordVisualTransformation(),
-                keyboardOptions = KeyboardOptions(
-                    keyboardType = KeyboardType.Password,
-                    imeAction = ImeAction.Done,
-                ),
-                keyboardActions = KeyboardActions(
-                    onDone = { onAction(LoginAction.OnSignIn) },
-                ),
-            )
+            LoginHeader()
+            Spacer(Modifier.height(12.dp))
+            form()
+            Spacer(Modifier.height(12.dp))
+            signIn()
+        }
+    }
+}
 
-            Spacer(Modifier.height(32.dp))
-            Keycap(
-                modifier = Modifier.fillMaxWidth().height(61.dp),
-                onClick = { onAction(LoginAction.OnSignIn) },
-                color = colors.rust,
-                contentColor = colors.onRust,
+@Composable
+private fun LoginTwoPane(
+    form: @Composable ColumnScope.() -> Unit,
+    signIn: @Composable () -> Unit,
+) {
+    val colors = RetroTheme.colors
+    Row(Modifier.fillMaxSize()) {
+        CenteredScrollColumn(
+            modifier = Modifier
+                .weight(EpigraphPaneWeight)
+                .fillMaxHeight()
+                .background(colors.stage),
+            spacing = 16.dp,
+            contentPadding = PaddingValues(32.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Column(
+                modifier = Modifier.widthIn(max = EpigraphMaxWidth).fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
             ) {
+                Logo()
+                Spacer(Modifier.height(24.dp))
                 Text(
-                    text = stringResource(Res.string.login_sign_in),
-                    style = MaterialTheme.typography.titleMedium,
+                    text = stringResource(Res.string.login_quote),
+                    style = MaterialTheme.typography.displaySmall,
+                    color = MaterialTheme.colorScheme.onBackground,
                 )
+                Text(
+                    text = stringResource(Res.string.login_quote_author).uppercase(),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = colors.rust,
+                )
+            }
+        }
+        CenteredScrollColumn(
+            modifier = Modifier.weight(1f - EpigraphPaneWeight).fillMaxHeight(),
+            contentPadding = PaddingValues(horizontal = 40.dp, vertical = 24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            Column(
+                modifier = Modifier.widthIn(max = FormMaxWidth).fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(20.dp),
+            ) {
+                LoginHeader()
+                Spacer(Modifier.height(12.dp))
+                form()
+                Spacer(Modifier.height(12.dp))
+                signIn()
             }
         }
     }
 }
+
+private const val EpigraphPaneWeight = 0.46f
+private val EpigraphMaxWidth = 440.dp
+private val FormMaxWidth = 520.dp
+private val SinglePaneMaxWidth = 420.dp
 
 @Composable
 private fun LoginField(
