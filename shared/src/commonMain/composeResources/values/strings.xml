@@ -98,4 +98,6 @@
     <string name="login_sign_in">Sign in</string>
     <string name="error_username_invalid">Username: 3–20 Latin letters, digits or “_”</string>
     <string name="error_password_invalid">Password: at least 6 characters, with a letter and a digit, no spaces</string>
+    <string name="login_quote">Time discovers truth.</string>
+    <string name="login_quote_author">Seneca</string>
 </resources>
